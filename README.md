@@ -10,33 +10,33 @@
 
 [Citation for ERD](https://circle.visual-paradigm.com/hospital/)
 1. Use the Doctors Office ERD above to answer the following questions:
-    1. How many patients can each doctor have?
-    1. How many doctors can each patient have?
-    1. How would you describe the relationship between patients and tests? Be sure to use either one-to-one, one-to-many, or many-to-many in your answer.
-    1. What are the foreign keys in this diagram?
-    1. What is the primary key for the Tests table.
-    1. What query would return the number of doctors who have a specialization in "pediatrics"?
+    1. How many patients can each doctor have?  They can have multiple patients
+    1. How many doctors can each patient have? They can have one doctor
+    1. How would you describe the relationship between patients and tests? Be sure to use either one-to-one, one-to-many, or many-to-many in your answer. It is one-to-many. The symbols on the diagram are one-to- next to the patients and many-to- next to tests.
+    1. What are the foreign keys in this diagram? They are the doctor_id in patients and patient_id in tests
+    1. What is the primary key for the Tests table.  It is the id.
+    1. What query would return the number of doctors who have a specialization in "pediatrics"? SELECT COUNT(name) FROM doctors WHERE specialization = "pediatrics";
 
 <br>
 
-2. What does a join table do? Why would we need one?
-3. What is a question that the following query helps answer?
+2. What does a join table do? Why would we need one? It is a table that contains columns from multiple tables. It helps us compare the data in the tables inside one table.
+3. What is a question that the following query helps answer? It shows the hometowns and how many artists are from those hometowns.
 ```SQL
 SELECT hometown, COUNT(name) FROM artists
 GROUP BY hometown;
 ```
 
-4. I'm trying to write a query to find the average age of all patients, but it's not working. How would you modify this query to get it to work as expected?
+4. I'm trying to write a query to find the average age of all patients, but it's not working. How would you modify this query to get it to work as expected? SELECT AVG(age) FROM patients;
 ```SQL
 SELECT age FROM AVERAGE(patients);
 ```
-5. How would you describe the difference between a `LEFT JOIN` and an `INNER JOIN`
+5. How would you describe the difference between a `LEFT JOIN` and an `INNER JOIN` A LEFT JOIN is a specific JOIN that shows all contents of one table and only the ones that intersect with the first table from the second table. INNER JOIN shows only the intersecting contents.
  
 ## Exercise (10 Points Possible)
 
 Follow these steps to setup the assessment:
 1. Create a new database named `flight_db` using pgAdmin.
-2. Copy [this script](https://launch.turing.edu/module2/assessments/flight_db.txt) and paste it into the query tool to insert records into your database.
+2. Copy [this script](https://launch.turing.edu/module2/assessments/flight_db.txt) and paste it into the query tool to insert records into your database. 
 3. Run the following `SELECT` queries individually to get an understanding of the data:
 > `SELECT * FROM airlines;`
 > `SELECT * FROM flights;`
