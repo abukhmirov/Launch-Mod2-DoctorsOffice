@@ -15,7 +15,7 @@
     1. How would you describe the relationship between patients and tests? Be sure to use either one-to-one, one-to-many, or many-to-many in your answer. It is one-to-many. The symbols on the diagram are one-to- next to the patients and many-to- next to tests.
     1. What are the foreign keys in this diagram? They are the doctor_id in patients and patient_id in tests
     1. What is the primary key for the Tests table.  It is the id.
-    1. What query would return the number of doctors who have a specialization in "pediatrics"? SELECT COUNT(name) FROM doctors WHERE specialization = "pediatrics";
+    1. What query would return the number of doctors who have a specialization in "pediatrics"? SELECT COUNT(name) FROM doctors WHERE specialization = 'pediatrics';
 
 <br>
 
@@ -44,16 +44,25 @@ Follow these steps to setup the assessment:
 ** If you need help setting up the database, reach out to an instructor! **
 
 Please provide the QUERY (not the answer) that returns each of the following:
-1. The flight numbers for all delayed flights (i.e. not on time).
-2. The count of delayed flights.
-3. The sum of prices for all flights arriving to Raleigh-Durham (`RDU`).
-4. The average price for all flights in the database.
-5. The average price for all flights arriving to Raleigh-Durham.
-6. The departure city and number of flights departing from each city.
-7. The count of airlines in the database.
-8. The count of flights in the database.
-9. The flight number, departure city, arrival city, price, and airline name of each flight. Do not return the airline ID number.
-10. The airline name, flight number, and price of each flight on the Delta airline. (Assume that you do not know the ID number of the Delta airline. In a larger database, you would be expected to memorize ID numbers).
+1. The flight numbers for all delayed flights (i.e. not on time). SELECT * FROM flights
+WHERE on_time = false;
+2. The count of delayed flights. SELECT COUNT(id) FROM flights
+WHERE on_time = false;
+3. The sum of prices for all flights arriving to Raleigh-Durham (`RDU`). SELECT SUM(price) FROM flights
+WHERE arrive_city = 'RDU';
+4. The average price for all flights in the database. SELECT AVG(price) FROM flights;
+5. The average price for all flights arriving to Raleigh-Durham. SELECT AVG(price) FROM flights
+WHERE arrive_city = 'RDU';
+6. The departure city and number of flights departing from each city. SELECT depart_city, COUNT(id) FROM flights
+WHERE arrive_city = 'RDU'
+GROUP BY depart_city;
+7. The count of airlines in the database. SELECT COUNT(id) FROM airlines;
+8. The count of flights in the database. SELECT COUNT(id) FROM flights;
+9. The flight number, departure city, arrival city, price, and airline name of each flight. Do not return the airline ID number. SELECT flights.flight_number, flights.depart_city, flights.arrive_city, flights.price, airlines.airline_name FROM flights
+JOIN airlines ON airlines.id = airlines.id;
+10. The airline name, flight number, and price of each flight on the Delta airline. (Assume that you do not know the ID number of the Delta airline. In a larger database, you would be expected to memorize ID numbers). SELECT airlines.airline_name, flights.flight_number, flights.price FROM flights
+JOIN airlines ON airlines.id = airlines.id
+WHERE airlines.airline_name = 'Delta';
 
 ## Submission
 
